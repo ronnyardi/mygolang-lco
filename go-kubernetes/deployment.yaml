@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-web
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: go-web
+  template:
+    metadata:
+      labels:
+        app: go-web
+    spec:
+      containers:
+      - name: go-kubernetes
+        image: forbsey/go-web-application
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 3000
